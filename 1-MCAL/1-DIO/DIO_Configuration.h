@@ -13,7 +13,7 @@
              DIO_u8_INIT_INPUT*/
 
 /* PORTA */
-#define DIO_u8_PA0_INIT_DIRECTION DIO_u8_INIT_INPUT
+#define DIO_u8_PA0_INIT_DIRECTION DIO_u8_INIT_OUTPUT
 #define DIO_u8_PA1_INIT_DIRECTION DIO_u8_INIT_INPUT
 #define DIO_u8_PA2_INIT_DIRECTION DIO_u8_INIT_INPUT
 #define DIO_u8_PA3_INIT_DIRECTION DIO_u8_INIT_INPUT
@@ -51,11 +51,11 @@
 /************************************************************************************************************/
 /************************************** Initial values for all PINs ***************************************/
 /* Options : DIO_u8_OUTPUT_LOW
-             DIO_u8_OUTPUT_LOW
+             DIO_u8_OUTPUT_HIGH
              DIO_u8_INPUT_FLOATING
              DIO_u8_INPUT_PULLUP */
 
-#define DIO_u8_PA0_INIT_VALUE DIO_u8_INPUT_FLOATING
+#define DIO_u8_PA0_INIT_VALUE DIO_u8_OUTPUT_HIGH
 #define DIO_u8_PA1_INIT_VALUE DIO_u8_INPUT_FLOATING
 #define DIO_u8_PA2_INIT_VALUE DIO_u8_INPUT_FLOATING
 #define DIO_u8_PA3_INIT_VALUE DIO_u8_INPUT_FLOATING

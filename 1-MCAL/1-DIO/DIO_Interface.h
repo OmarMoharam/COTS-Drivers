@@ -61,6 +61,6 @@ u8 DIO_u8GetPortValue(u8 Copy_u8PortId, u8 *Copy_pu8ReturnedPortValue);
 
 /**************************************************** Macros for PIN Value ******************************************************/
 #define DIO_u8_HIGH 1
-#define DIO_U8_LOW 0
+#define DIO_u8_LOW 0
 
 #endif

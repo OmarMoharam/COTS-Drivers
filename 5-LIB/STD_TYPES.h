@@ -11,7 +11,7 @@ typedef float f32;
 typedef double f64;
 typedef long double f128;
 
-#define STD_TYPES_OK 1
+#define STD_TYPE_OK 1
 #define STD_TYPE_NOK 0
 
 #define NULL ((void *)0)
