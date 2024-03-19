@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "bit_maths.h": "c"
+    },
+    "cSpell.words": [
+        "DDRA",
+        "DDRB",
+        "DDRC",
+        "DDRD",
+        "MCAL",
+        "PINA",
+        "PINB",
+        "PINC",
+        "PIND",
+        "PORTA",
+        "PORTB",
+        "PORTC",
+        "PORTD",
+        "Tarek"
+    ]
+}
