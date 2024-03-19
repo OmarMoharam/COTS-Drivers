@@ -17,5 +17,6 @@
         "PORTC",
         "PORTD",
         "Tarek"
-    ]
+    ],
+    "C_Cpp.errorSquiggles": "disabled"
 }

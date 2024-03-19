@@ -24,5 +24,18 @@
 #define DIO_u8_DDRD_REGISTER  *((volatile *)0x31)
 #define DIO_u8_PIND_REGISTER  *((volatile *)0x30)
 /********************************************************************************************************************************/
+/*************************************************** Macros for PINs DIRECTION ***************************************************/
+#define DIO_u8_INIT_OUTPUT 1
+#define DIO_u8_INIT_INPUT 0
+/********************************************************************************************************************************/
+/*************************************************** Macros for PINs VALUES ***************************************************/
+#define DIO_u8_OUTPUT_LOW 0
+#define DIO_u8_OUTPUT_HIGH 1
+#define DIO_u8_INPUT_FLOATING 0
+#define DIO_u8_INPUT_PULLUP 1
+
+/* function to init PINs */
+#define DIO_INIT(P7,P6,P5,P4,P3,P2,P1,P0)       DIO_INIT_HELP(P7,P6,P5,P4,P3,P2,P1,P0)
+#define DIO_INIT_HELP(P7,P6,P5,P4,P3,P2,P1,P0)  0b##P7##P6##P5##P4##P3##P2##P1##P0
 
 #endif

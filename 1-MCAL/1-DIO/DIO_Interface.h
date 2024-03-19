@@ -9,6 +9,10 @@
 
 /********************************************** The Main Functions used in DIO ***********************************************/
 /*****************************************************************************************************************************/
+
+/*init the DIO PINs*/
+void DIO_voidInit(void);
+
 /*Set the direction of the PIN by selecting port number, pin number and its direction and the return type u8 is indication
 for the function is worked right or wrong*/
 u8 DIO_u8SetPinDirection(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8PinDirection);
