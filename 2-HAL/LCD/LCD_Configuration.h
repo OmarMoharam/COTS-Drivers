@@ -7,7 +7,7 @@
 #ifndef LCD_CONFIGURATION_H
 #define LCD_CONFIGURATION_H
 
-/* This for ports in command function */
+/* This for ports used in functions */
 /*Options : 1- DIO_u8_PORTA 
             2- DIO_u8_PORTB 
             3- DIO_u8_PORTC
@@ -16,7 +16,7 @@
 #define LCD_u8_DATA_PORT DIO_u8_PORTB
 
 
-/* This for pins in command function */
+/* This for pins used in functions */
 /*Options : 1- DIO_u8_PIN0 
             2- DIO_u8_PIN1 
             3- DIO_u8_PIN2
