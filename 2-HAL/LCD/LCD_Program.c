@@ -63,3 +63,32 @@ void LCD_voidSendChar(u8 Copy_u8Char)
     /* E = 0 */
     DIO_u8SetPinValue(LCD_u8_CONTROL_PORT,LCD_u8_E_PIN,DIO_u8_LOW);
 }
+
+void LCD_voidSendString(u8 *Copy_Pu8String)
+{
+    while (*Copy_Pu8String != '\0')
+    {
+        LCD_voidSendChar(*Copy_Pu8String);
+        Copy_Pu8String++;
+    }
+    
+}
+
+u8 LCD_voidGoToXY(u8 Copy_u8LineNumber, u8 Copy_u8Location)
+{
+    u8 Local_u8ErrorState = STD_TYPE_OK;
+    if (Copy_u8Location <= 39)
+    {
+        switch (Copy_u8LineNumber)
+        {
+        case LCD_u8_LINE1:LCD_voidSendCommand(0x80+Copy_u8Location); break;
+        case LCD_u8_LINE2:LCD_voidSendCommand(0xC0+Copy_u8Location); break;
+        default: Local_u8ErrorState = STD_TYPE_NOK; break;
+        }
+    }
+    else
+    {
+        Local_u8ErrorState = STD_TYPE_NOK;
+    }
+    return Local_u8ErrorState;
+}
