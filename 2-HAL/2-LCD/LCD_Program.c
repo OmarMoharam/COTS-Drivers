@@ -142,19 +142,35 @@ void LCD_voidSendSpecialCharacter(u8 Copy_u8CharLocation, u8 *Copy_Pu8SpecialCha
 {
     switch (Copy_u8CharLocation)
     {
-    case LCD_u8_CHAR_0: LCD_voidSendCommand(LCD_u8_CHAR_0_ADDRESS); break;
-    case LCD_u8_CHAR_1: LCD_voidSendCommand(LCD_u8_CHAR_1_ADDRESS); break;
-    case LCD_u8_CHAR_2: LCD_voidSendCommand(LCD_u8_CHAR_2_ADDRESS); break;
-    case LCD_u8_CHAR_3: LCD_voidSendCommand(LCD_u8_CHAR_3_ADDRESS); break;
-    case LCD_u8_CHAR_4: LCD_voidSendCommand(LCD_u8_CHAR_4_ADDRESS); break;
-    case LCD_u8_CHAR_5: LCD_voidSendCommand(LCD_u8_CHAR_5_ADDRESS); break;
-    case LCD_u8_CHAR_6: LCD_voidSendCommand(LCD_u8_CHAR_6_ADDRESS); break;
-    case LCD_u8_CHAR_7: LCD_voidSendCommand(LCD_u8_CHAR_7_ADDRESS); break;
+    case LCD_u8_CHAR_0:
+        LCD_voidSendCommand(LCD_u8_CHAR_0_ADDRESS);
+        break;
+    case LCD_u8_CHAR_1:
+        LCD_voidSendCommand(LCD_u8_CHAR_1_ADDRESS);
+        break;
+    case LCD_u8_CHAR_2:
+        LCD_voidSendCommand(LCD_u8_CHAR_2_ADDRESS);
+        break;
+    case LCD_u8_CHAR_3:
+        LCD_voidSendCommand(LCD_u8_CHAR_3_ADDRESS);
+        break;
+    case LCD_u8_CHAR_4:
+        LCD_voidSendCommand(LCD_u8_CHAR_4_ADDRESS);
+        break;
+    case LCD_u8_CHAR_5:
+        LCD_voidSendCommand(LCD_u8_CHAR_5_ADDRESS);
+        break;
+    case LCD_u8_CHAR_6:
+        LCD_voidSendCommand(LCD_u8_CHAR_6_ADDRESS);
+        break;
+    case LCD_u8_CHAR_7:
+        LCD_voidSendCommand(LCD_u8_CHAR_7_ADDRESS);
+        break;
 
-    default: return; break;
+    default:
+        break;
     }
-
-    LCD_voidSendCommand(Copy_u8CharLocation);
+    
 
     for (u8 Local_u8Counter = 0; Local_u8Counter < 8; Local_u8Counter++)
     {
