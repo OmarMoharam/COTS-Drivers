@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "bit_maths.h": "c",
-        "std_types.h": "c"
+        "std_types.h": "c",
+        "kpd_interface.h": "c"
     },
     "cSpell.words": [
         "DDRA",
