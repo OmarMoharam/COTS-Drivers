@@ -60,24 +60,24 @@ void DIO_voidInit(void)
         case DIO_u8_PORTB:
             switch (Copy_u8PinDirection)
             {
-            case DIO_u8_OUTPUT:SET_BIT(DIO_u8_DDRA_REGISTER,Copy_u8PinId);break;
-            case DIO_u8_INPUT:CLR_BIT(DIO_u8_DDRA_REGISTER,Copy_u8PinId);break;
+            case DIO_u8_OUTPUT:SET_BIT(DIO_u8_DDRB_REGISTER,Copy_u8PinId);break;
+            case DIO_u8_INPUT:CLR_BIT(DIO_u8_DDRB_REGISTER,Copy_u8PinId);break;
             }
             break;
 
         case DIO_u8_PORTC:
             switch (Copy_u8PinDirection)
             {
-            case DIO_u8_OUTPUT:SET_BIT(DIO_u8_DDRA_REGISTER,Copy_u8PinId);break;
-            case DIO_u8_INPUT:CLR_BIT(DIO_u8_DDRA_REGISTER,Copy_u8PinId);break;
+            case DIO_u8_OUTPUT:SET_BIT(DIO_u8_DDRC_REGISTER,Copy_u8PinId);break;
+            case DIO_u8_INPUT:CLR_BIT(DIO_u8_DDRC_REGISTER,Copy_u8PinId);break;
             }
             break;
 
         case DIO_u8_PORTD:
             switch (Copy_u8PinDirection)
             {
-            case DIO_u8_OUTPUT:SET_BIT(DIO_u8_DDRA_REGISTER,Copy_u8PinId);break;
-            case DIO_u8_INPUT:CLR_BIT(DIO_u8_DDRA_REGISTER,Copy_u8PinId);break;
+            case DIO_u8_OUTPUT:SET_BIT(DIO_u8_DDRD_REGISTER,Copy_u8PinId);break;
+            case DIO_u8_INPUT:CLR_BIT(DIO_u8_DDRD_REGISTER,Copy_u8PinId);break;
             }
             break;
         default:Local_u8ErrorState = STD_TYPE_NOK;
@@ -230,32 +230,32 @@ u8 DIO_u8SetPortDirection(u8 Copy_u8PortId, u8 Copy_u8PortDirection)
         case DIO_u8_PORTA:
             switch (Copy_u8PortDirection)
             {
-            case DIO_u8_OUTPUT : DIO_u8_PORTA_REGISTER = 0xff;break;
-            case DIO_u8_INPUT : DIO_u8_PORTA_REGISTER = 0x00;break;
+            case DIO_u8_OUTPUT : DIO_u8_DDRA_REGISTER = 0xff;break;
+            case DIO_u8_INPUT : DIO_u8_DDRA_REGISTER = 0x00;break;
             }
             break;
         
         case DIO_u8_PORTB:
             switch (Copy_u8PortDirection)
             {
-            case DIO_u8_OUTPUT : DIO_u8_PORTB_REGISTER = 0xff;break;
-            case DIO_u8_INPUT : DIO_u8_PORTB_REGISTER = 0x00;break;
+            case DIO_u8_OUTPUT : DIO_u8_DDRB_REGISTER = 0xff;break;
+            case DIO_u8_INPUT : DIO_u8_DDRB_REGISTER = 0x00;break;
             }
             break;
 
         case DIO_u8_PORTC:
             switch (Copy_u8PortDirection)
             {
-            case DIO_u8_OUTPUT : DIO_u8_PORTC_REGISTER = 0xff;break;
-            case DIO_u8_INPUT : DIO_u8_PORTC_REGISTER = 0x00;break;
+            case DIO_u8_OUTPUT : DIO_u8_DDRC_REGISTER = 0xff;break;
+            case DIO_u8_INPUT : DIO_u8_DDRC_REGISTER = 0x00;break;
             }
             break;
 
         case DIO_u8_PORTD:
             switch (Copy_u8PortDirection)
             {
-            case DIO_u8_OUTPUT : DIO_u8_PORTD_REGISTER = 0xff;break;
-            case DIO_u8_INPUT : DIO_u8_PORTD_REGISTER = 0x00;break;
+            case DIO_u8_OUTPUT : DIO_u8_DDRD_REGISTER = 0xff;break;
+            case DIO_u8_INPUT : DIO_u8_DDRD_REGISTER = 0x00;break;
             }
             break;        
 
