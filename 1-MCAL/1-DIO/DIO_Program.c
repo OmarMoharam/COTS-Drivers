@@ -275,15 +275,50 @@ u8 DIO_u8SetPortDirection(u8 Copy_u8PortId, u8 Copy_u8PortDirection)
 u8 DIO_u8SetPortValue(u8 Copy_u8PortId, u8 Copy_u8PortValue)
 {
     u8 Local_u8ErrorState = STD_TYPE_OK;
-    switch (Copy_u8PortId)
+
+    if (Copy_u8PortValue == DIO_u8_HIGH || Copy_u8PortValue == DIO_u8_LOW)
     {
-    case DIO_u8_PORTA : DIO_u8_PORTA_REGISTER = Copy_u8PortValue;break;
-    case DIO_u8_PORTB : DIO_u8_PORTB_REGISTER = Copy_u8PortValue;break;
-    case DIO_u8_PORTC : DIO_u8_PORTC_REGISTER = Copy_u8PortValue;break;
-    case DIO_u8_PORTD : DIO_u8_PORTD_REGISTER = Copy_u8PortValue;break;
-    
-    default: Local_u8ErrorState = STD_TYPE_NOK;
-        break;
+        switch (Copy_u8PortId)
+        {
+        case DIO_u8_PORTA:
+            switch (Copy_u8PortValue)
+            {
+            case DIO_u8_HIGH : DIO_u8_PORTA_REGISTER = 0xff;break;
+            case DIO_u8_LOW : DIO_u8_PORTA_REGISTER = 0x00;break;
+            }
+            break;
+        
+        case DIO_u8_PORTB:
+            switch (Copy_u8PortValue)
+            {
+            case DIO_u8_HIGH : DIO_u8_PORTB_REGISTER = 0xff;break;
+            case DIO_u8_LOW : DIO_u8_PORTB_REGISTER = 0x00;break;
+            }
+            break;
+
+        case DIO_u8_PORTC:
+            switch (Copy_u8PortValue)
+            {
+            case DIO_u8_HIGH : DIO_u8_PORTC_REGISTER = 0xff;break;
+            case DIO_u8_LOW : DIO_u8_PORTC_REGISTER = 0x00;break;
+            }
+            break;
+
+        case DIO_u8_PORTD:
+            switch (Copy_u8PortValue)
+            {
+            case DIO_u8_HIGH : DIO_u8_PORTD_REGISTER = 0xff;break;
+            case DIO_u8_LOW : DIO_u8_PORTD_REGISTER = 0x00;break;
+            }
+            break;        
+
+        default: Local_u8ErrorState = STD_TYPE_NOK;
+            break;
+        }
+    }
+    else
+    {
+        Local_u8ErrorState = STD_TYPE_NOK;
     }
     return Local_u8ErrorState;
 }
