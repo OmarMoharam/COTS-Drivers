@@ -31,7 +31,7 @@ for the function is worked right or wrong*/
 u8 DIO_u8SetPortDirection(u8 Copy_u8PortId, u8 Copy_u8PortDirection);
 
 /*Set the value of the PORT after making it output and the return type u8 is indication
-for the function is worked right or wrong*/
+for the function is worked right or wrong "Should send the entire port like 0b1101000 "*/
 u8 DIO_u8SetPortValue(u8 Copy_u8PortId, u8 Copy_u8PortValue);
 
 /*Get the value of the PORT by pointer after making it input and the return type u8 is indication

@@ -22,16 +22,16 @@ void LCD_voidInit(void)
 {
     /* Function Set */
     _delay_us(35);
-    LCD_voidSendCommand(0b00111000);
+    LCD_voidSendCommand(LCD_u8_FUNCTION_SET_ADDRESS);
     /* Display ON/OFF Control */
     _delay_us(40);
-    LCD_voidSendCommand(0b00001111);
+    LCD_voidSendCommand(LCD_u8_DISPLAY_CONTROL_ADDRESS);
     /* Display Clear */
     _delay_us(40);
-    LCD_voidSendCommand(0b00000001);
+    LCD_voidSendCommand(LCD_u8_DISPLAY_CLEAR_ADDRESS);
     /* Entry Mode Set */
     _delay_us(2);
-    LCD_voidSendCommand(0b00000110);
+    LCD_voidSendCommand(LCD_u8_ENTRY_MODE_ADDRESS);
 }
 
 void LCD_voidSendCommand(u8 Copy_u8Command)
