@@ -23,7 +23,7 @@
 u8 ST_u8MoveMotor(u8 Copy_u8Direction, u16 Copy_u16Degree)
 {
     u8 Local_u8ErrorState = STD_TYPE_OK;
-    if (Copy_u8Degree > 360) {Copy_u8Degree -= 360;}
+    if (Copy_u16Degree > 360) {Copy_u16Degree -= 360;}
     
     /* Number of steps */
 
