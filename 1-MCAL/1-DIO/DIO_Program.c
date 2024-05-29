@@ -275,14 +275,14 @@ u8 DIO_u8SetPortDirection(u8 Copy_u8PortId, u8 Copy_u8PortDirection)
 
 u8  DIO_u8SetPortValue    (u8 Copy_u8PortId, u8 Copy_u8PortValue)
 {
-	u8 Local_u8ErrorState = STD_TYPES_OK;
+	u8 Local_u8ErrorState = STD_TYPE_OK;
 	switch (Copy_u8PortId)
 	{
 		case DIO_u8_PORTA:DIO_u8_PORTA_REGISTER = Copy_u8PortValue;break;
 		case DIO_u8_PORTB:DIO_u8_PORTB_REGISTER = Copy_u8PortValue;break;
 		case DIO_u8_PORTC:DIO_u8_PORTC_REGISTER = Copy_u8PortValue;break;
 		case DIO_u8_PORTD:DIO_u8_PORTD_REGISTER = Copy_u8PortValue;break;
-		default : Local_u8ErrorState = STD_TYPES_NOK;
+		default : Local_u8ErrorState = STD_TYPE_NOK;
 	}
 	return Local_u8ErrorState;
 }
