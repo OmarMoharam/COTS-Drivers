@@ -3,14 +3,20 @@
         "bit_maths.h": "c",
         "std_types.h": "c",
         "kpd_interface.h": "c",
-        "dio_interface.h": "c"
+        "dio_interface.h": "c",
+        "exti_interface.h": "c"
     },
     "cSpell.words": [
         "DDRA",
         "DDRB",
         "DDRC",
         "DDRD",
+        "EXTI",
+        "GICR",
+        "GIFR",
         "MCAL",
+        "MCUCR",
+        "MCUCSR",
         "PINA",
         "PINB",
         "PINC",
@@ -19,6 +25,7 @@
         "PORTB",
         "PORTC",
         "PORTD",
+        "SREG",
         "Tarek"
     ],
     "C_Cpp.errorSquiggles": "disabled"
