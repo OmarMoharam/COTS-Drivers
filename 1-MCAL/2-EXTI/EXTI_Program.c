@@ -13,6 +13,9 @@
 #include "EXTI_Interface.h"
 #include "EXTI_Private.h"
 
+/* Global pointer to  a function */
+static void (*EXTI_ApfEXTI[3])(void) = {NULL, NULL, NULL}; // to solve wild pointers
+
 u8 EXTI_u8Enable(u8 Copy_u8EXTIPin, u8 Copy_u8EdgeSource)
 {
     u8 Local_u8ErrorState = STD_TYPE_OK;
@@ -125,3 +128,52 @@ u8 EXTI_u8Disable(u8 Copy_u8EXTIPin)
     }
     return Local_u8ErrorState;
 }
+
+/* Set Call Function */
+u8 EXTI_u8EXTISetCallBack(u8 Copy_u8EXTIIndex, void(*Copy_pvoidFunction)(void))
+{
+    u8 Local_u8ErrorState = STD_TYPE_OK;
+    if ((Copy_u8EXTIIndex <= EXTI_u8_INT2) && (Copy_pvoidFunction != NULL))
+    {
+        EXTI_ApfEXTI[Copy_u8EXTIIndex] = Copy_pvoidFunction;
+    }
+    else
+    {
+        Local_u8ErrorState = STD_TYPE_NOK;
+    }
+    
+    
+    return Local_u8ErrorState;
+}
+
+/* Prototype for ISR of EXTI 0*/
+void __vector_1(void)     __attribute__((signal));
+void __vector_1(void)
+{
+    if (EXTI_ApfEXTI[EXTI_u8_INT0] != NULL)
+    {
+        EXTI_ApfEXTI[EXTI_u8_INT0]();
+    }
+    
+}
+
+/* Prototype for ISR of EXTI 1*/
+void __vector_2(void)     __attribute__((signal));
+void __vector_2(void)
+{
+    if (EXTI_ApfEXTI[EXTI_u8_INT1] != NULL)
+    {
+        EXTI_ApfEXTI[EXTI_u8_INT1]();
+    }
+}
+
+/* Prototype for ISR of EXTI 2*/
+void __vector_3(void)     __attribute__((signal));
+void __vector_3(void)
+{
+    if (EXTI_ApfEXTI[EXTI_u8_INT2] != NULL)
+    {
+        EXTI_ApfEXTI[EXTI_u8_INT2]();
+    }
+}
+

@@ -22,7 +22,5 @@ u8 EXTI_u8Disable(u8 Copy_u8EXTIPin);
 #define EXTI_u8_ANY_LOGICAL_STATE 4
 
 /* ISR */
-/*#define ISR_1 void __vector_1(void)     __attribute__((signal))
-#define ISR_2 void __vector_2(void)     __attribute__((signal))
-#define ISR_3 void __vector_3(void)     __attribute__((signal))*/
+u8 EXTI_u8EXTISetCallBack(u8 Copy_u8EXTIIndex, void(*Copy_pvoidFunction)(void));
 #endif
