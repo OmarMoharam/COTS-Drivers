@@ -7,10 +7,14 @@
 #ifndef TIMERS_INTERFACE_H
 #define TIMERS_INTERFACE_H
 
-void Timer_voidInit(void);
+/********************************************* Timer 1 *********************************************/
+void Timer_voidInitTimer0(void);
 u8 Timer_u8Timer0SetCallBackOVF(void(*Copy_pvoidApplication)(void));
 u8 Timer_u8Timer0SetCallBackCTC(void(*Copy_pvoidApplication)(void));
+void Timer_voidSetCompareMatchValue(u8 Copy_u8OCR0Value);
 
-
+/***************************************************************************************************/
+/********************************************* Timer 1 *********************************************/
+void Timer_voidInitTimer1(void);
 
 #endif

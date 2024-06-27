@@ -15,7 +15,7 @@
 static void(*Timer_pfTimer0[2])(void) = {NULL, NULL};
 
 
-void Timer_voidInit(void)
+void Timer_voidInitTimer0(void)
 {
     /*  1- Choose Timer Mode
         2- Set Timer PIE
@@ -35,6 +35,39 @@ void Timer_voidInit(void)
     CLR_BIT(TIMER_u8_TCCR0_REGISTER, TIMER_TCCR0_CS00_BIT);
 }
 
+
+void Timer_voidInitTimer1(void)
+{
+    /*  1- Choose Timer Mode
+        2- Select HW Action on OC
+        3- Set Top Value for ICR
+        4- Set Angle of Servo Motor
+        5- Choose CLK */
+
+    SET_BIT(TIMER_u8_TCCR1A_REGISTER, TIMER_TCCR1A_WGM11_BIT);
+    CLR_BIT(TIMER_u8_TCCR1A_REGISTER, TIMER_TCCR1A_WGM10_BIT);
+    SET_BIT(TIMER_u8_TCCR1B_REGISTER, TIMER_TCCR1B_WGM13_BIT);
+    SET_BIT(TIMER_u8_TCCR1B_REGISTER, TIMER_TCCR1B_WGM12_BIT);
+
+    SET_BIT(TIMER_u8_TCCR1A_REGISTER, TIMER_TCCR1A_COM1A1_BIT);
+    CLR_BIT(TIMER_u8_TCCR1A_REGISTER, TIMER_TCCR1A_COM1A0_BIT);
+
+    TIMER_u16_ICR1A_REGISTER = 19999;
+
+    TIMER_u16_OCR1A_REGISTER = 999;
+
+    CLR_BIT(TIMER_u8_TCCR1B_REGISTER, TIMER_TCCR1B_CS12_BIT);
+    SET_BIT(TIMER_u8_TCCR1B_REGISTER, TIMER_TCCR1B_CS11_BIT);
+    CLR_BIT(TIMER_u8_TCCR1B_REGISTER, TIMER_TCCR1B_CS10_BIT);
+}
+
+
+void Timer_voidSetCompareMatchValue(u8 Copy_u8OCR0Value)
+{
+    TIMER_u8_OCR0_REGISTER = Copy_u8OCR0Value;
+}
+
+
 u8 Timer_u8Timer0SetCallBackOVF(void(*Copy_pvoidApplication)(void))
 {
     u8 Local_u8ErrorState = STD_TYPE_OK;
@@ -51,6 +84,7 @@ u8 Timer_u8Timer0SetCallBackOVF(void(*Copy_pvoidApplication)(void))
 
 }
 
+
 u8 Timer_u8Timer0SetCallBackCTC(void(*Copy_pvoidApplication)(void))
 {
     u8 Local_u8ErrorState = STD_TYPE_OK;
@@ -65,6 +99,7 @@ u8 Timer_u8Timer0SetCallBackCTC(void(*Copy_pvoidApplication)(void))
     return Local_u8ErrorState;
     
 }
+
 
 /* Prototype for ISR of Timer Normal Mode */
 void __vector_11(void)   __attribute__((signal));
@@ -81,12 +116,13 @@ void __vector_11(void)
         /* Callback function from application */
         if (Timer_pfTimer0[0] != NULL)
         {
-            Timer_pfTimer0[0];
+            Timer_pfTimer0[0]();
         }
         
     }
     
 }
+
 
 /* Prototype for ISR of Timer CTC Mode */
 void __vector_10(void)   __attribute__((signal));
@@ -101,7 +137,7 @@ void __vector_10(void)
         /* Callback function from application */
         if (Timer_pfTimer0[1] != NULL)
         {
-            Timer_pfTimer0[1];
+            Timer_pfTimer0[1]();
         }
         
     }
