@@ -11,10 +11,13 @@
 void Timer_voidInitTimer0(void);
 u8 Timer_u8Timer0SetCallBackOVF(void(*Copy_pvoidApplication)(void));
 u8 Timer_u8Timer0SetCallBackCTC(void(*Copy_pvoidApplication)(void));
-void Timer_voidSetCompareMatchValue(u8 Copy_u8OCR0Value);
+void Timer_voidTimer0SetCompareMatchValue(u8 Copy_u8OCR0Value);
 
 /***************************************************************************************************/
 /********************************************* Timer 1 *********************************************/
 void Timer_voidInitTimer1(void);
 
+/***************************************************************************************************/
+/******************************************** Timer 1 Servo ****************************************/
+void Timer_voidTimer1SetCompareMatchValue(u16 Copy_u16OCRValue);
 #endif

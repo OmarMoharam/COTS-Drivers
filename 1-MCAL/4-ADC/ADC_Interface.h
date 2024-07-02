@@ -9,7 +9,7 @@
 
 void ADC_voidInit(void);
 u8 ADC_u8GetDigitalValueSynchNonBlocking(u8 Copy_u8Channel, u16 * Copy_Pu16DigitalValue);
-u8 ADC_u8Asynchronous(u8 Copy_u8Channel, void(*Copy_pfNotification)(u16))
+u8 ADC_u8Asynchronous(u8 Copy_u8Channel, void(*Copy_pfNotification)(u16));
 u8 ADC_u8GetDigitalValueAsyn(u16 *Copy_u16pu16DigitalValue);
 
 /* Channel Numbers */

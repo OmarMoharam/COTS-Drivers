@@ -66,7 +66,7 @@
 
 #define TIMER_u8_ICR1AH_REGISTER *((volatile u8 *)0x47)
 #define TIMER_u8_ICR1AL_REGISTER *((volatile u8 *)0x46)
-#define TIMER_u16_ICR1A_REGISTER *((volatile u16 *)0x46)
+#define TIMER_u16_ICR1_REGISTER *((volatile u16 *)0x46)
 
 /* Bits of TCCR1A */
 #define TIMER_TCCR1A_COM1A1_BIT 7

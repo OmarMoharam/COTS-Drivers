@@ -14,7 +14,7 @@ int main(void)
     /* SET CALL Back "Should be implemented before enable timer"*/
     Timer_u8Timer0SetCallBackOVF(&toggle_led);
 
-    Timer_voidInit;
+    Timer_voidInit();
 
     while (1);
     return 0;

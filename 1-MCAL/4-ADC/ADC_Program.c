@@ -97,7 +97,7 @@ u8 ADC_u8Asynchronous(u8 Copy_u8Channel, void(*Copy_pfNotification)(u16))
         ADC_pfNotification = Copy_pfNotification;
 
         /* Enable ADC Interrupt */
-        SET_BIT(ADC_u8_ADCSRA_ADATE, ADC_u8_ADCSRA_ADIE);
+        SET_BIT(ADC_u8_ADCSRA_REGISTER, ADC_u8_ADCSRA_ADIE);
 
         /* 1- Select the channel */
         ADC_u8_ADMUX_REGISTER &= 0b11100000; //to clear the first 5 bit and keep the Most 3 bits
@@ -118,7 +118,7 @@ u8 ADC_u8GetDigitalValueAsyn(u16 *Copy_u16pu16DigitalValue)
     u8 Local_u8ErrorState = STD_TYPE_OK;
     if (Copy_u16pu16DigitalValue != NULL)
     {
-        Copy_u16pu16DigitalValue = ADC_u16_ADC_REGISTER;
+        *Copy_u16pu16DigitalValue = ADC_u16_ADC_REGISTER;
     }
     else
     {
@@ -137,7 +137,7 @@ void __vector_16(void)
         /* Clear the flag */
         ADC_u8BusyFlag = 0;
         /* Clear PIE of ADC */
-        CLR_BIT(ADC_u8_ADCSRA_ADATE, ADC_u8_ADCSRA_ADIE);
+        SET_BIT(ADC_u8_ADCSRA_REGISTER, ADC_u8_ADCSRA_ADIF);
         /* Calling Notification function */
         ADC_pfNotification(ADC_u16_ADC_REGISTER);
     }

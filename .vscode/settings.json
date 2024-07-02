@@ -4,7 +4,9 @@
         "std_types.h": "c",
         "kpd_interface.h": "c",
         "dio_interface.h": "c",
-        "exti_interface.h": "c"
+        "exti_interface.h": "c",
+        "servo_inteface.h": "c",
+        "wdt_interface.h": "c"
     },
     "cSpell.words": [
         "ADCH",
@@ -29,6 +31,7 @@
         "PORTB",
         "PORTC",
         "PORTD",
+        "Prescaler",
         "SFIOR",
         "SREG",
         "Tarek"
