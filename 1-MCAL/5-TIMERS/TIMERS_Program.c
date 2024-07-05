@@ -12,7 +12,7 @@
 #include "TIMERS_Private.h"
 
 /* Set Call function for Timer 0 */
-static void(*Timer_pfTimer0[2])(void) = {NULL, NULL};
+static void(*Timer_pfTimer0[3])(void) = {NULL, NULL};
 
 
 void Timer_voidInitTimer0(void)
@@ -61,10 +61,22 @@ void Timer_voidInitTimer1(void)
     CLR_BIT(TIMER_u8_TCCR1B_REGISTER, TIMER_TCCR1B_CS10_BIT);
 }
 
+void Timer_voidTimer1SetValue(u16 Copy_u16Value)
+{
+	TIMER_u16_TCNT1_REGISTER = Copy_u16Value;
+}
+
+u16 Timer_u16Timer1ReadValue(void)
+{
+	return TIMER_u16_TCNT1_REGISTER;
+}
+
+
 void Timer_voidTimer1SetCompareMatchValue(u16 Copy_u16OCRValue)
 {
     TIMER_u16_OCR1A_REGISTER = Copy_u16OCRValue;
 }
+
 
 void Timer_voidTimer0SetCompareMatchValue(u8 Copy_u8OCR0Value)
 {
@@ -104,6 +116,64 @@ u8 Timer_u8Timer0SetCallBackCTC(void(*Copy_pvoidApplication)(void))
     
 }
 
+void ICU_voidInit(void)
+{
+    /* Set it as Rising Edge */
+    SET_BIT(TIMER_u8_TCCR1B_REGISTER, TIMER_TCCR1B_ICES1_BIT);
+
+    /* Enable Interrupt */
+    SET_BIT(TIMER_u8_TIMSK_REGISTER, TIMER_TIMSK_TICIE1_BIT);
+}
+
+u8 ICU_u8SetTriggerEdge(u8 Copy_u8Edge)
+{
+    u8 Local_u8ErrorState = STD_TYPE_OK;
+    switch (Copy_u8Edge)
+    {
+    case Timer_u8_ICU_RISING_EDGE:
+        SET_BIT(TIMER_u8_TCCR1B_REGISTER, TIMER_TCCR1B_ICES1_BIT);
+        break;
+    
+    case Timer_u8_ICU_FALLING_EDGE:
+        CLR_BIT(TIMER_u8_TCCR1B_REGISTER, TIMER_TCCR1B_ICES1_BIT);
+        break;
+    
+    default:
+        Local_u8ErrorState = STD_TYPE_NOK;
+        break;
+    }
+    return Local_u8ErrorState;
+}
+
+void ICU_voidEnableInterrupt(void)
+{
+    SET_BIT(TIMER_u8_TIMSK_REGISTER, TIMER_TIMSK_TICIE1_BIT);
+}
+
+void ICU_voidDisableInterrupt(void)
+{
+    CLR_BIT(TIMER_u8_TIMSK_REGISTER, TIMER_TIMSK_TICIE1_BIT);
+}
+
+u16 ICU_u16ReadValue(void)
+{
+    return TIMER_u16_ICR1_REGISTER;
+}
+
+u8 ICU_u8SetCallBack(void(*Copy_pvoidApplication)(void))
+{
+    u8 Local_u8ErrorState = STD_TYPE_OK;
+    if (Copy_pvoidApplication != NULL)
+    {
+        Timer_pfTimer0[2] = Copy_pvoidApplication;
+    }
+    else
+    {
+        Local_u8ErrorState = STD_TYPE_NOK;
+    }
+    
+    return Local_u8ErrorState;
+}
 
 /* Prototype for ISR of Timer Normal Mode */
 void __vector_11(void)   __attribute__((signal));
@@ -145,5 +215,16 @@ void __vector_10(void)
         }
         
     }
+    
+}
+
+/* Prototype for ISR of ICU */
+void __vector_6(void)   __attribute__((signal));
+void __vector_6(void)
+{
+        if (Timer_pfTimer0[2] != NULL)
+        {
+            Timer_pfTimer0[2]();
+        }
     
 }
