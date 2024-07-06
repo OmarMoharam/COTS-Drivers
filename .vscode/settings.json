@@ -6,7 +6,9 @@
         "dio_interface.h": "c",
         "exti_interface.h": "c",
         "servo_inteface.h": "c",
-        "wdt_interface.h": "c"
+        "wdt_interface.h": "c",
+        "uart_configuration.h": "c",
+        "uart_interface.h": "c"
     },
     "cSpell.words": [
         "ADCH",
@@ -32,6 +34,8 @@
         "PORTC",
         "PORTD",
         "Prescaler",
+        "Recieve",
+        "Reciever",
         "SFIOR",
         "SREG",
         "Tarek"
