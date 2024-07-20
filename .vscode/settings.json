@@ -36,6 +36,7 @@
         "PORTD",
         "Prescaler",
         "Recieve",
+        "Recieved",
         "Reciever",
         "SFIOR",
         "SREG",
