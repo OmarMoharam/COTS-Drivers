@@ -18,8 +18,8 @@ void TWI_voidMasterInit(void)
     CLR_BIT(TWI_u8_TWSR_REGISTER, TWI_u8_TWSR_TWPS1_BIT);
     CLR_BIT(TWI_u8_TWSR_REGISTER, TWI_u8_TWSR_TWPS0_BIT);
     
-    //set TWBR with the value => 16KHZ
-    TWI_u8_TWBR_REGISTER = 0xF2;
+    //set TWBR with the value => 200KHZ
+    TWI_u8_TWBR_REGISTER = 12;
     
     //Enable ACK
     SET_BIT(TWI_u8_TWCR_REGISTER, TWI_u8_TWCR_TWEA_BIT);
@@ -60,7 +60,7 @@ u8 TWI_u8SendStartCondition(void)
     //clear flag + start condition
     TWI_u8_TWCR_REGISTER = (1<<TWI_u8_TWCR_TWINT_BIT) | (1<<TWI_u8_TWCR_TWSTA_BIT) | (1 << TWI_u8_TWCR_TWEN_BIT);
     
-    //check the flag while(!= 1)
+    //check the flag while(!= 1) and should add
     while(!(GET_BIT(TWI_u8_TWCR_REGISTER, TWI_u8_TWCR_TWINT_BIT)));
     
     //check status code start condition ACK
@@ -126,7 +126,7 @@ u8 TWI_u8SendSlaveAddressWithWrite(u8 Copy_u8SlaveAddress)
     while(!(GET_BIT(TWI_u8_TWCR_REGISTER, TWI_u8_TWCR_TWINT_BIT)));
 
     //check status code slave address + Write ACK
-    if (((TWI_u8_TWSR_REGISTER & 0xF8) != SLAVE_SLA_W_ACK) )
+    if (((TWI_u8_TWSR_REGISTER & 0xF8) != MASTER_SLA_W_ACK) )
     {
         Local_u8ErrorState = STD_TYPE_NOK;
     }
@@ -149,7 +149,7 @@ u8 TWI_u8SendSlaveAddressWithRead(u8 Copy_u8SlaveAddress)
     while(!(GET_BIT(TWI_u8_TWCR_REGISTER, TWI_u8_TWCR_TWINT_BIT)));
 
     //check status code slave address + read ACK
-    if (((TWI_u8_TWSR_REGISTER & 0xF8) != SLAVE_SLA_R_ACK) )
+    if (((TWI_u8_TWSR_REGISTER & 0xF8) != MASTER_SLA_R_ACK) )
     {
         Local_u8ErrorState = STD_TYPE_NOK;
     }
@@ -172,7 +172,7 @@ u8 TWI_u8SendDataByte(u8 Copy_u8DataByte)
     while(!(GET_BIT(TWI_u8_TWCR_REGISTER, TWI_u8_TWCR_TWINT_BIT)));
 
     //check status code master send data ACK
-    if (((TWI_u8_TWSR_REGISTER & 0xF8) != SLAVE_DATA_RECEIVED_ACK) )
+    if (((TWI_u8_TWSR_REGISTER & 0xF8) != MASTER_DATA_TRANSMITTED_ACK) )
     {
         Local_u8ErrorState = STD_TYPE_NOK;
     }
