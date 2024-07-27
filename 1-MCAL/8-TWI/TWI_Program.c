@@ -28,9 +28,9 @@ void TWI_voidMasterInit(void)
     SET_BIT(TWI_u8_TWCR_REGISTER, TWI_u8_TWCR_TWEN_BIT);
 }
 
-u8 TWI_u8SlaveInit(u8 Copy_u8SlaveAddress)
+TWI_ErrorState TWI_u8SlaveInit(u8 Copy_u8SlaveAddress)
 {
-    u8 Local_u8ErrorState = STD_TYPE_OK;
+    TWI_ErrorState Local_enuErrorState = TWI_OK;
     
     //set slave address TWAR ensure its within range and doesn't equal to a reserved address and slave address begin from bit 1
     if((Copy_u8SlaveAddress <= 127) && (Copy_u8SlaveAddress != 0) && (Copy_u8SlaveAddress <= 0xF0))
@@ -46,16 +46,16 @@ u8 TWI_u8SlaveInit(u8 Copy_u8SlaveAddress)
     
     else
     {
-        Local_u8ErrorState = STD_TYPE_NOK;
+        Local_enuErrorState = TWI_SLA_Init_Error;
     }
     
-    return Local_u8ErrorState;
+    return Local_enuErrorState;
     
 }
 
-u8 TWI_u8SendStartCondition(void)
+TWI_ErrorState TWI_u8SendStartCondition(void)
 {
-    u8 Local_u8ErrorState = STD_TYPE_OK;
+    TWI_ErrorState Local_enuErrorState = TWI_OK;
     
     //clear flag + start condition
     TWI_u8_TWCR_REGISTER = (1<<TWI_u8_TWCR_TWINT_BIT) | (1<<TWI_u8_TWCR_TWSTA_BIT) | (1 << TWI_u8_TWCR_TWEN_BIT);
@@ -66,18 +66,18 @@ u8 TWI_u8SendStartCondition(void)
     //check status code start condition ACK
     if (((TWI_u8_TWSR_REGISTER & 0xF8) != MASTER_START_CONDITION) )
     {
-        Local_u8ErrorState = STD_TYPE_NOK;
+        Local_enuErrorState = TWI_SC_Error;
     }
     
     //clear start condition bit
     CLR_BIT(TWI_u8_TWCR_REGISTER, TWI_u8_TWCR_TWSTA_BIT);
     
-    return Local_u8ErrorState;
+    return Local_enuErrorState;
 }
 
-u8 TWI_u8SendRepeatedStartCondition(void)
+TWI_ErrorState TWI_u8SendRepeatedStartCondition(void)
 {
-    u8 Local_u8ErrorState = STD_TYPE_OK;
+    TWI_ErrorState Local_enuErrorState = TWI_OK;
     
     //clear flag + start condition
     TWI_u8_TWCR_REGISTER = (1<<TWI_u8_TWCR_TWINT_BIT) | (1<<TWI_u8_TWCR_TWSTA_BIT) | (1 << TWI_u8_TWCR_TWEN_BIT);
@@ -88,17 +88,17 @@ u8 TWI_u8SendRepeatedStartCondition(void)
     //check status code for repeated start condition ACK
     if (((TWI_u8_TWSR_REGISTER & 0xF8) != MASTER_REPEATED_START_CONDITION) )
     {
-        Local_u8ErrorState = STD_TYPE_NOK;
+        Local_enuErrorState = TWI_RSC_Error;
     }
     
     //clear start condition bit
     CLR_BIT(TWI_u8_TWCR_REGISTER, TWI_u8_TWCR_TWSTA_BIT);
-    return Local_u8ErrorState;
+    return Local_enuErrorState;
 }
 
-u8 TWI_u8SendStopCondition(void)
+TWI_ErrorState TWI_u8SendStopCondition(void)
 {
-    u8 Local_u8ErrorState = STD_TYPE_OK;
+    TWI_ErrorState Local_enuErrorState = TWI_OK;
 
     //clear flag + stop condition
     TWI_u8_TWCR_REGISTER = (1<<TWI_u8_TWCR_TWINT_BIT) | (1<<TWI_u8_TWCR_TWSTO_BIT) | (1 << TWI_u8_TWCR_TWEN_BIT);
@@ -106,16 +106,16 @@ u8 TWI_u8SendStopCondition(void)
     //check ACK
     if (((TWI_u8_TWSR_REGISTER & 0xF8) != SLAVE_STOP_OR_REPEATED) )
     {
-        Local_u8ErrorState = STD_TYPE_NOK;
+        Local_enuErrorState = TWI_STC_Error;
     }
 
-    return Local_u8ErrorState;
+    return Local_enuErrorState;
     
 }
 
-u8 TWI_u8SendSlaveAddressWithWrite(u8 Copy_u8SlaveAddress)
+TWI_ErrorState TWI_u8SendSlaveAddressWithWrite(u8 Copy_u8SlaveAddress)
 {
-    u8 Local_u8ErrorState = STD_TYPE_OK;
+    TWI_ErrorState Local_enuErrorState = TWI_OK;
     
     //write slave address + 0 in TWDR
     TWI_u8_TWDR_REGISTER = (Copy_u8SlaveAddress<<1) | (0<<TWI_U8_TWDR_RW_BIT);
@@ -128,17 +128,17 @@ u8 TWI_u8SendSlaveAddressWithWrite(u8 Copy_u8SlaveAddress)
     //check status code slave address + Write ACK
     if (((TWI_u8_TWSR_REGISTER & 0xF8) != MASTER_SLA_W_ACK) )
     {
-        Local_u8ErrorState = STD_TYPE_NOK;
+        Local_enuErrorState = TWI_SLA_W_Error;
     }
 
-    return Local_u8ErrorState;
+    return Local_enuErrorState;
 
 
 }
 
-u8 TWI_u8SendSlaveAddressWithRead(u8 Copy_u8SlaveAddress)
+TWI_ErrorState TWI_u8SendSlaveAddressWithRead(u8 Copy_u8SlaveAddress)
 {
-    u8 Local_u8ErrorState = STD_TYPE_OK;
+    TWI_ErrorState Local_enuErrorState = TWI_OK;
     
     //write slave address + 0 in TWDR
     TWI_u8_TWDR_REGISTER = (Copy_u8SlaveAddress<<1) | (1<<TWI_U8_TWDR_RW_BIT);
@@ -151,16 +151,16 @@ u8 TWI_u8SendSlaveAddressWithRead(u8 Copy_u8SlaveAddress)
     //check status code slave address + read ACK
     if (((TWI_u8_TWSR_REGISTER & 0xF8) != MASTER_SLA_R_ACK) )
     {
-        Local_u8ErrorState = STD_TYPE_NOK;
+        Local_enuErrorState = TWI_SLA_R_Error;
     }
 
-    return Local_u8ErrorState;
+    return Local_enuErrorState;
 
 }
 
-u8 TWI_u8SendDataByte(u8 Copy_u8DataByte)
+TWI_ErrorState TWI_u8SendDataByte(u8 Copy_u8DataByte)
 {
-    u8 Local_u8ErrorState = STD_TYPE_OK;
+    TWI_ErrorState Local_enuErrorState = TWI_OK;
 
     //write data in TWDR
     TWI_u8_TWDR_REGISTER = Copy_u8DataByte;
@@ -174,15 +174,15 @@ u8 TWI_u8SendDataByte(u8 Copy_u8DataByte)
     //check status code master send data ACK
     if (((TWI_u8_TWSR_REGISTER & 0xF8) != MASTER_DATA_TRANSMITTED_ACK) )
     {
-        Local_u8ErrorState = STD_TYPE_NOK;
+        Local_enuErrorState = TWI_MT_DATA_Error;
     }
 
-    return Local_u8ErrorState;
+    return Local_enuErrorState;
 }
 
-u8 TWI_u8RecieveDataByte(u8 *Copy_pu8DataByte)
+TWI_ErrorState TWI_u8RecieveDataByte(u8 *Copy_pu8DataByte)
 {
-    u8 Local_u8ErrorState = STD_TYPE_OK;
+    TWI_ErrorState Local_enuErrorState = TWI_OK;
 
     //check pointer
     if (Copy_pu8DataByte != NULL)
@@ -196,19 +196,22 @@ u8 TWI_u8RecieveDataByte(u8 *Copy_pu8DataByte)
         //check status code master read data ACK
         if (((TWI_u8_TWSR_REGISTER & 0xF8) != MASTER_DATA_RECEIVED_ACK) )
         {
-        Local_u8ErrorState = STD_TYPE_NOK;
+        Local_enuErrorState = TWI_MR_DATA_Error;
         }
+        else
+        {
+            //read data in TWDR
+            *Copy_pu8DataByte = TWI_u8_TWDR_REGISTER;
 
-        //read data in TWDR
-        *Copy_pu8DataByte = TWI_u8_TWDR_REGISTER;
-
+        }
+        
     }
     else
     {
-        Local_u8ErrorState = STD_TYPE_NOK;
+        Local_enuErrorState = TWI_NULL_POINTER;
     }
     
-    return Local_u8ErrorState;
+    return Local_enuErrorState;
 
     
 }
