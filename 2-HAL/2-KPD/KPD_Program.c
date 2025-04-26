@@ -4,6 +4,13 @@
 /*************************** HWC : Keypad      ************************************/
 /*************************** Version : 1.0     ************************************/
 /**********************************************************************************/
+/********************************************************************/
+/************************ Author: Omar Tarek ************************/
+/************************ Date : 2/8/2024    ************************/
+/************************ SWC : KPD          ************************/
+/************************ Government : ITI   ************************/
+/************************ Diploma : One Month  **********************/
+/********************************************************************/
 #include "STD_TYPES.h"
 #include "BIT_MATHS.h"
 #define F_CPU 8000000UL
@@ -28,12 +35,12 @@ u8 KPD_u8GetKeyState(u8 *Copy_Pu8ReturnedKey)
 
     u8 Local_u8RowsCounter, Local_u8ColumnsCounter, Local_u8PinValue, Local_u8Flag = 0;
 
-    /* This value returned if there is no key pressed */
-    *Copy_Pu8ReturnedKey = KPD_u8_KEY_NOT_PRESSED;
-
     /* this condition should be exist at any pointer */
     if (Copy_Pu8ReturnedKey != NULL)
     {
+    	/* This value returned if there is no key pressed */
+    	 *Copy_Pu8ReturnedKey = KPD_u8_KEY_NOT_PRESSED;
+
         /* Activate each row */
         for (Local_u8RowsCounter = 0; Local_u8RowsCounter <= 3; Local_u8RowsCounter++)
         {

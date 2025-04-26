@@ -1,0 +1,10 @@
+# Ignore build files
+*.o
+*.elf
+*.bin
+*.hex
+
+# Ignore user settings
+.vscode/
+.idea/
+*.swp
